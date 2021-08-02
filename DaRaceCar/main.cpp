@@ -1,31 +1,31 @@
 #include <SFML\Graphics.hpp>
-#include <cassert>
+
+#include "Map.h"
+#include "States/MenuState.h"
 
 int main() {
-    sf::RenderWindow sfmlWin(sf::VideoMode(600, 360), "Hello World SFML Window");
-    sf::Font font;
-    //You need to pass the font file location
-    if (!font.loadFromFile(/*
-                           Put the filename that identify the font file you want to load*/"Candal.ttf")) {
-        return -1;
-    }
-    sf::Text message("Hello, World !", font);
-
-    while (sfmlWin.isOpen()) {
-
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Test");
+    State::window = &window;
+    State::SetActiveState(States::Menu);
+    
+    while (window.isOpen())
+    {
         sf::Event e;
-        while (sfmlWin.pollEvent(e)) {
-
-            switch (e.type) {
+        while (window.pollEvent(e))
+        {
+            switch (e.type)
+            {
             case sf::Event::EventType::Closed:
-                sfmlWin.close();
+                window.close();
                 break;
             }
         }
 
-        sfmlWin.clear();
-        sfmlWin.draw(message);
-        sfmlWin.display();
+        window.clear();
+        State::GetCurrentState()->Update();
+        window.display();
     }
+    State::CleanUp();
+
     return 0;
 }

@@ -152,10 +152,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="States\GameState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="States\MenuState.cpp" />
+    <ClCompile Include="States\State.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Candal.ttf" />
+    <Font Include="Assets\Candal.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="States\GameState.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="States\MenuState.h" />
+    <ClInclude Include="States\State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
