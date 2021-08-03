@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DaCar.cpp" />
     <ClCompile Include="States\GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -162,6 +163,7 @@
     <Font Include="Assets\Candal.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DaCar.h" />
     <ClInclude Include="States\GameState.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="States\MenuState.h" />

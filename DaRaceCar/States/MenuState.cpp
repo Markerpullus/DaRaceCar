@@ -1,6 +1,6 @@
 #include "MenuState.h"
 
-void MenuState::Init()
+MenuState::MenuState()
 {
 	font.loadFromFile("Assets/Candal.ttf");
 	menuText.setFont(font);

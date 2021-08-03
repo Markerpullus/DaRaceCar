@@ -18,5 +18,4 @@ void State::SetActiveState(States state)
 		currentState = new GameState();
 		break;
 	}
-	currentState->Init();
 }

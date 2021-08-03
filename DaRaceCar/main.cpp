@@ -1,13 +1,13 @@
 #include <SFML\Graphics.hpp>
-#include <box2d/box2d.h>
 
 #include "Map.h"
 #include "States/MenuState.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Test");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "DaRaceCar");
+    window.setVerticalSyncEnabled(true);
     State::window = &window;
-    State::SetActiveState(States::Menu);
+    State::SetActiveState(States::Game);
     
     while (window.isOpen())
     {
@@ -27,6 +27,7 @@ int main() {
         window.display();
     }
     State::CleanUp();
+    
 
     return 0;
 }

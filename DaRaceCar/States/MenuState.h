@@ -9,10 +9,8 @@ private:
 	sf::Font font;
 
 public:
-	MenuState() = default;
+	MenuState();
 	~MenuState() = default;
-
-	virtual void Init() override;
 
 	virtual void Update() override;
 };
