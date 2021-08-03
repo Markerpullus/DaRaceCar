@@ -1,4 +1,5 @@
 #include <SFML\Graphics.hpp>
+#include <box2d/box2d.h>
 
 #include "Map.h"
 #include "States/MenuState.h"

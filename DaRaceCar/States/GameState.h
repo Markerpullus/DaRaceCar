@@ -5,6 +5,8 @@
 class GameState : public State
 {
 private:
+	sf::Sprite car;
+	sf::Texture carTexture;
 
 public:
 	GameState() = default;
