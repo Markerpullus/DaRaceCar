@@ -1,4 +1,5 @@
 #include "GameState.h"
+#include "../DebugDraw.h"
 
 #include <iostream>
 
@@ -12,10 +13,12 @@ GameState::GameState()
 {
 	b2Vec2 gravity(0.0f, 400.0f * W2B);
 	world = new b2World(gravity);
-	groundBodyDef.position.Set(256.0f * W2B, 720.0f * W2B);
+	groundBodyDef.position.Set(640.0f * W2B, 720.0f * W2B);
 	groundBody = world->CreateBody(&groundBodyDef);
-	groundBox.SetAsBox(256.0f * W2B, 10.0f * W2B);
-	groundBody->CreateFixture(&groundBox, 0.0f);
+	groundBox.SetAsBox(1280.0f * W2B, 10.0f * W2B);
+	groundFixtureDef.shape = &groundBox;
+	groundFixtureDef.friction = 0.2f;
+	groundBody->CreateFixture(&groundFixtureDef);
 
 	/*
 	bodyDef.type = b2_dynamicBody;
@@ -31,10 +34,6 @@ GameState::GameState()
 	body->SetAngularVelocity(2.0f);*/
 
 	daCar = new DaCar(world);
-	carTexture.loadFromFile("Assets/car.png");
-	daCar->setTexture(carTexture);
-	daCar->setScale(2, 2);
-	daCar->setOrigin(40, 25);
 }
 
 GameState::~GameState()
@@ -46,9 +45,12 @@ GameState::~GameState()
 void GameState::Update()
 {
 	world->Step(1.0f / 60.0f, 6, 2);
-	b2Vec2 position = B2W * daCar->GetBody()->GetPosition();
-	float rotation = RAD2DEG * daCar->GetBody()->GetAngle();
-	daCar->setPosition(position.x, position.y);
-	daCar->setRotation(rotation);
-	window->draw(*daCar);
+	daCar->Update();
+	window->draw(daCar->bodySprite);
+	window->draw(daCar->wheel1Sprite);
+	window->draw(daCar->wheel2Sprite);
+	Debug::DrawBody(window, daCar->GetWheel1());
+	Debug::DrawBody(window, daCar->GetWheel2());
+	Debug::DrawBody(window, groundBody);
+	Debug::DrawBody(window, daCar->GetBody());
 }

@@ -12,10 +12,9 @@ private:
 	b2BodyDef groundBodyDef;
 	b2Body* groundBody;
 	b2PolygonShape groundBox;
+	b2FixtureDef groundFixtureDef;
 	
 	DaCar* daCar;
-
-	sf::Texture carTexture;
 
 public:
 	GameState();

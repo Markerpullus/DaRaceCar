@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DaCar.h" />
+    <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="States\GameState.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="States\MenuState.h" />
