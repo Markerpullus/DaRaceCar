@@ -29,13 +29,16 @@ private:
 	b2WheelJointDef axle2Def;
 	b2WheelJoint* axle2;
 
-public:
-	DaCar(b2World* w);
-	~DaCar() = default;
-
 	sf::Sprite bodySprite;
 	sf::Sprite wheel1Sprite;
 	sf::Sprite wheel2Sprite;
+
+	bool inAir;
+
+public:
+	DaCar(b2World* w);
+	~DaCar() = default;
+	
 	inline b2Body* GetBody() { return body; }
 	inline b2Body* GetWheel1() { return wheel1; }
 	inline b2Body* GetWheel2() { return wheel2; }
@@ -43,5 +46,8 @@ public:
 	inline b2WheelJoint* GetAxle2() { return axle2; }
 
 	void Update();
+
+	friend class GameState;
+	friend class ContactListener;
 };
 

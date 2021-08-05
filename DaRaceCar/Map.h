@@ -1,17 +1,32 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include <SFML/Graphics.hpp>
+#include <box2d/box2d.h>
 
-class Map : public sf::Sprite
+class Map
 {
 private:
+	b2World* world;
+
+	b2BodyDef mapBodyDef;
+	b2Body* mapBody;
+	std::vector<b2PolygonShape> mapShapes;
+	std::vector<b2FixtureDef> mapFixtureDefs;
+
 	sf::Texture texture;
-	sf::Texture collisionMap;
+	sf::Sprite mapSprite;
 
 public:
-	Map(std::string textureFile, std::string collisionMapFile);
+	Map(b2World* w);
 	~Map() = default;
+
+	inline b2Body* GetBody() { return mapBody; }
+
+	void LoadFromFile(std::string file);
+
+	friend class GameState;
 };
 

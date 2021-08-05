@@ -17,15 +17,15 @@ DaCar::DaCar(b2World* w)
 	bodyTexture.loadFromFile("Assets/body.png");
 	wheelsTexture.loadFromFile("Assets/wheels.png");
 	bodySprite.setTexture(bodyTexture);
-	bodySprite.setOrigin(40.5f, 21.5f);
-	bodySprite.setScale(1.9f, 1.9f);
+	bodySprite.setOrigin(200.0f, 112.5f);
+	bodySprite.setScale(0.5f, 0.5f);
 
 	wheel1Sprite.setTexture(wheelsTexture);
 	wheel2Sprite.setTexture(wheelsTexture);
 	wheel1Sprite.setOrigin(32, 32);
 	wheel2Sprite.setOrigin(32, 32);
-	wheel1Sprite.setScale(0.5f, 0.5f);
-	wheel2Sprite.setScale(0.5f, 0.5f);
+	wheel1Sprite.setScale(0.6f, 0.6f);
+	wheel2Sprite.setScale(0.6f, 0.6f);
 
 	// Physics
 	bodyDef.type = b2_dynamicBody;
@@ -33,12 +33,13 @@ DaCar::DaCar(b2World* w)
 	body = world->CreateBody(&bodyDef);
 	bodyShape.SetAsBox(81.0f * W2B, 43.0f * W2B);
 	bodyFixtureDef.shape = &bodyShape;
-	bodyFixtureDef.density = 0.05f;
+	bodyFixtureDef.density = 0.02f;
 	bodyFixtureDef.friction = 0.4f;
 	bodyFixtureDef.restitution = 0.1f;
 	body->CreateFixture(&bodyFixtureDef);
+	body->SetUserData("CarBody");
 
-	wheelShape.m_radius = 18.0f * W2B;
+	wheelShape.m_radius = 20.0f * W2B;
 	wheel1FixtureDef.shape = &wheelShape;
 	wheel1FixtureDef.density = 0.2f;
 	wheel1FixtureDef.friction = 10.0f;
@@ -52,20 +53,22 @@ DaCar::DaCar(b2World* w)
 	
 	wheel1Def.type = b2_dynamicBody;
 	b2Vec2 bodyPos = body->GetPosition();
-	wheel1Def.position.Set(bodyPos.x + 40.0f * W2B, bodyPos.y + 30.0f * W2B);
+	wheel1Def.position.Set(bodyPos.x + 80.0f * W2B, bodyPos.y + 12.0f * W2B);
 	wheel1Def.angularDamping = 0.2f;
 	wheel1 = world->CreateBody(&wheel1Def);
 	wheel1->CreateFixture(&wheel1FixtureDef);
+	wheel1->SetUserData("Wheel");
 	
 	wheel2Def.type = b2_dynamicBody;
-	wheel2Def.position.Set(bodyPos.x - 40.0f * W2B, bodyPos.y + 30.0f * W2B);
+	wheel2Def.position.Set(bodyPos.x - 80.0f * W2B, bodyPos.y + 12.0f * W2B);
 	wheel2Def.angularDamping = 0.2f;
 	wheel2 = world->CreateBody(&wheel2Def);
 	wheel2->CreateFixture(&wheel2FixtureDef);
+	wheel2->SetUserData("Wheel");
 
 	axle1Def.bodyA = body;
 	axle1Def.bodyB = wheel1;
-	axle1Def.localAnchorA = b2Vec2(2.5f, 2.5f);
+	axle1Def.localAnchorA = b2Vec2(4.0f, 2.0f);
 	axle1Def.localAnchorB = b2Vec2(0, 0);
 	b2LinearStiffness(axle1Def.stiffness, axle1Def.damping, 5.0f, 0.2f, axle1Def.bodyA, axle1Def.bodyB);
 	axle1Def.collideConnected = false;
@@ -75,12 +78,14 @@ DaCar::DaCar(b2World* w)
 	
 	axle2Def.bodyA = body;
 	axle2Def.bodyB = wheel2;
-	axle2Def.localAnchorA = b2Vec2(-2.5f, 2.5f);
+	axle2Def.localAnchorA = b2Vec2(-4.0f, 2.0f);
 	axle2Def.localAnchorB = b2Vec2(0, 0);
 	b2LinearStiffness(axle2Def.stiffness, axle2Def.damping, 5.0f, 0.2f, axle2Def.bodyA, axle2Def.bodyB);
 	axle1Def.collideConnected = false;
 	axle2Def.localAxisA = b2Vec2(0, 1);
 	axle2 = (b2WheelJoint*)world->CreateJoint(&axle2Def);
+
+	inAir = false;
 }
 
 void DaCar::Update()

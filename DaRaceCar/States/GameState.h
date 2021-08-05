@@ -4,17 +4,17 @@
 
 #include "State.h"
 #include "../DaCar.h"
+#include "../Map.h"
 
 class GameState : public State
 {
 private:
 	b2World* world;
-	b2BodyDef groundBodyDef;
-	b2Body* groundBody;
-	b2PolygonShape groundBox;
-	b2FixtureDef groundFixtureDef;
 	
+	Map* map;
 	DaCar* daCar;
+
+	sf::View* camera;
 
 public:
 	GameState();
