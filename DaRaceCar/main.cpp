@@ -22,7 +22,7 @@ int main() {
             }
         }
 
-        window.clear();
+        window.clear(sf::Color(135, 206, 250));
         State::GetCurrentState()->Update();
         window.display();
     }

@@ -21,10 +21,13 @@ private:
 	b2Body* wheel1;
 	b2Body* wheel2;
 	b2CircleShape wheelShape;
-	b2FixtureDef wheelFixtureDef;
+	b2FixtureDef wheel1FixtureDef;
+	b2FixtureDef wheel2FixtureDef;
 
-	b2JointDef axleDef;
-	b2Joint* axle;
+	b2WheelJointDef axle1Def;
+	b2WheelJoint* axle1;
+	b2WheelJointDef axle2Def;
+	b2WheelJoint* axle2;
 
 public:
 	DaCar(b2World* w);
@@ -36,7 +39,8 @@ public:
 	inline b2Body* GetBody() { return body; }
 	inline b2Body* GetWheel1() { return wheel1; }
 	inline b2Body* GetWheel2() { return wheel2; }
-	inline b2Joint* GetAxle() { return axle; }
+	inline b2WheelJoint* GetAxle1() { return axle1; }
+	inline b2WheelJoint* GetAxle2() { return axle2; }
 
 	void Update();
 };

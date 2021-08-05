@@ -17,21 +17,8 @@ GameState::GameState()
 	groundBody = world->CreateBody(&groundBodyDef);
 	groundBox.SetAsBox(1280.0f * W2B, 10.0f * W2B);
 	groundFixtureDef.shape = &groundBox;
-	groundFixtureDef.friction = 0.2f;
+	groundFixtureDef.friction = 1.0f;
 	groundBody->CreateFixture(&groundFixtureDef);
-
-	/*
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(256.0f * W2B, 4.0f * W2B);
-	body = world->CreateBody(&bodyDef);
-	dynamicBox.SetAsBox(81.0f * W2B, 51.0f * W2B);
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.0f;
-	fixtureDef.restitution = 0.7f;
-	body->CreateFixture(&fixtureDef);
-	body->SetLinearDamping(0.0f);
-	body->SetAngularVelocity(2.0f);*/
 
 	daCar = new DaCar(world);
 }
@@ -49,8 +36,9 @@ void GameState::Update()
 	window->draw(daCar->bodySprite);
 	window->draw(daCar->wheel1Sprite);
 	window->draw(daCar->wheel2Sprite);
+	/*
 	Debug::DrawBody(window, daCar->GetWheel1());
 	Debug::DrawBody(window, daCar->GetWheel2());
 	Debug::DrawBody(window, groundBody);
-	Debug::DrawBody(window, daCar->GetBody());
+	Debug::DrawBody(window, daCar->GetBody());*/
 }
