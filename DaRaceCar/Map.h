@@ -19,6 +19,8 @@ private:
 	sf::Texture texture;
 	sf::Sprite mapSprite;
 
+	int mapIdentifier = 2;
+
 public:
 	Map(b2World* w);
 	~Map() = default;

@@ -1,13 +1,14 @@
 #include <SFML\Graphics.hpp>
 
-#include "Map.h"
 #include "States/MenuState.h"
+#include "States/GameState.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "DaRaceCar");
     window.setVerticalSyncEnabled(true);
     State::window = &window;
-    State::SetActiveState(States::Game);
+    State* currentState;
+    currentState = new MenuState;
     
     while (window.isOpen())
     {
@@ -23,11 +24,24 @@ int main() {
         }
 
         window.clear(sf::Color(135, 206, 250));
-        State::GetCurrentState()->Update();
+        if (currentState->changeState)
+        {
+            
+            switch (currentState->type)
+            {
+            case States::Game:
+                delete currentState;
+                currentState = new MenuState;
+                break;
+            case States::Menu:
+                delete currentState;
+                currentState = new GameState;
+                break;
+            }
+        }
+        currentState->Update();
         window.display();
     }
-    State::CleanUp();
     
-
     return 0;
 }

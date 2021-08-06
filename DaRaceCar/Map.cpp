@@ -27,8 +27,8 @@ Map::Map(b2World* w)
 	mapSprite.setPosition(3000, 0);
 
 	mapBodyDef.position.Set(3000.0f * W2B, 0.0f * W2B);
+	mapBodyDef.userData.pointer = (uintptr_t)mapIdentifier;
 	mapBody = world->CreateBody(&mapBodyDef);
-	mapBody->SetUserData("map");
 }
 
 void Map::LoadFromFile(std::string file)

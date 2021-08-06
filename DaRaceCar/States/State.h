@@ -10,9 +10,6 @@ enum class States
 
 class State
 {
-protected:
-	static State* currentState;
-
 public:
 	State() = default;
 	~State() = default;
@@ -21,10 +18,7 @@ public:
 
 	static sf::RenderWindow* window;
 
-	static void SetActiveState(States state);
-
-	inline static State* GetCurrentState() { return currentState; }
-
-	inline static void CleanUp() { delete currentState; }
+	States type;
+	bool changeState = false;
 };
 

@@ -33,7 +33,8 @@ private:
 	sf::Sprite wheel1Sprite;
 	sf::Sprite wheel2Sprite;
 
-	bool inAir;
+	static bool inAir;
+	int wheelIdentifier = 1;
 
 public:
 	DaCar(b2World* w);

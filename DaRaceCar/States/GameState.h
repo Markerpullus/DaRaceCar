@@ -6,6 +6,13 @@
 #include "../DaCar.h"
 #include "../Map.h"
 
+class ContactListener : public b2ContactListener
+{
+	virtual void BeginContact(b2Contact* contact) override;
+
+	virtual void EndContact(b2Contact* contact) override;
+};
+
 class GameState : public State
 {
 private:
@@ -14,7 +21,11 @@ private:
 	Map* map;
 	DaCar* daCar;
 
-	sf::View* camera;
+	ContactListener contactListener;
+
+	sf::View camera;
+	sf::Texture flagTexture;
+	sf::Sprite finishFlag;
 
 public:
 	GameState();

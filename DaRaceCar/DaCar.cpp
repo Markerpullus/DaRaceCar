@@ -10,6 +10,8 @@
 #define DEG2RAD 0.0174532925199432957f
 #define RAD2DEG 57.295779513082320876f
 
+bool DaCar::inAir = false;
+
 DaCar::DaCar(b2World* w)
 	: world(w)
 {
@@ -37,7 +39,6 @@ DaCar::DaCar(b2World* w)
 	bodyFixtureDef.friction = 0.4f;
 	bodyFixtureDef.restitution = 0.1f;
 	body->CreateFixture(&bodyFixtureDef);
-	body->SetUserData("CarBody");
 
 	wheelShape.m_radius = 20.0f * W2B;
 	wheel1FixtureDef.shape = &wheelShape;
@@ -55,22 +56,22 @@ DaCar::DaCar(b2World* w)
 	b2Vec2 bodyPos = body->GetPosition();
 	wheel1Def.position.Set(bodyPos.x + 80.0f * W2B, bodyPos.y + 12.0f * W2B);
 	wheel1Def.angularDamping = 0.2f;
+	wheel1Def.userData.pointer = (uintptr_t)wheelIdentifier;
 	wheel1 = world->CreateBody(&wheel1Def);
 	wheel1->CreateFixture(&wheel1FixtureDef);
-	wheel1->SetUserData("Wheel");
 	
 	wheel2Def.type = b2_dynamicBody;
 	wheel2Def.position.Set(bodyPos.x - 80.0f * W2B, bodyPos.y + 12.0f * W2B);
 	wheel2Def.angularDamping = 0.2f;
+	wheel2Def.userData.pointer = (uintptr_t)wheelIdentifier;
 	wheel2 = world->CreateBody(&wheel2Def);
 	wheel2->CreateFixture(&wheel2FixtureDef);
-	wheel2->SetUserData("Wheel");
 
 	axle1Def.bodyA = body;
 	axle1Def.bodyB = wheel1;
 	axle1Def.localAnchorA = b2Vec2(4.0f, 2.0f);
 	axle1Def.localAnchorB = b2Vec2(0, 0);
-	b2LinearStiffness(axle1Def.stiffness, axle1Def.damping, 5.0f, 0.2f, axle1Def.bodyA, axle1Def.bodyB);
+	b2LinearStiffness(axle1Def.stiffness, axle1Def.damping, 4.0f, 0.2f, axle1Def.bodyA, axle1Def.bodyB);
 	axle1Def.collideConnected = false;
 	axle1Def.localAxisA = b2Vec2(0, 1);
 
@@ -80,12 +81,11 @@ DaCar::DaCar(b2World* w)
 	axle2Def.bodyB = wheel2;
 	axle2Def.localAnchorA = b2Vec2(-4.0f, 2.0f);
 	axle2Def.localAnchorB = b2Vec2(0, 0);
-	b2LinearStiffness(axle2Def.stiffness, axle2Def.damping, 5.0f, 0.2f, axle2Def.bodyA, axle2Def.bodyB);
+	b2LinearStiffness(axle2Def.stiffness, axle2Def.damping, 4.0f, 0.2f, axle2Def.bodyA, axle2Def.bodyB);
 	axle1Def.collideConnected = false;
 	axle2Def.localAxisA = b2Vec2(0, 1);
 	axle2 = (b2WheelJoint*)world->CreateJoint(&axle2Def);
 
-	inAir = false;
 }
 
 void DaCar::Update()
@@ -93,10 +93,14 @@ void DaCar::Update()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		wheel2->ApplyTorque(100.0f, true);
+		if (inAir)
+			body->ApplyTorque(200.0f, true);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		wheel2->ApplyTorque(-100.0f, true);
+		if (inAir)
+			body->ApplyTorque(-200.0f, true);
 	}
 	float wheel1speed = wheel1->GetAngularVelocity();
 	float wheel2speed = wheel2->GetAngularVelocity();
