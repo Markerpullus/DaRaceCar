@@ -19,7 +19,7 @@ private:
 
 public:
 	MenuState();
-	~MenuState() = default;
+	virtual ~MenuState() override = default;
 
 	virtual void Update() override;
 };

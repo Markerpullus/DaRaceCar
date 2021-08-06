@@ -12,7 +12,7 @@ class State
 {
 public:
 	State() = default;
-	~State() = default;
+	virtual ~State() = default;
 
 	virtual void Update() = 0;
 

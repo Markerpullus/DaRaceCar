@@ -36,7 +36,7 @@ private:
 
 public:
 	GameState();
-	~GameState();
+	virtual ~GameState() override;
 
 	virtual void Update() override;
 };

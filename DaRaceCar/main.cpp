@@ -26,15 +26,14 @@ int main() {
         window.clear(sf::Color(135, 206, 250));
         if (currentState->changeState)
         {
-            
             switch (currentState->type)
             {
             case States::Game:
-                delete (GameState*)currentState;
+                delete currentState;
                 currentState = new MenuState;
                 break;
             case States::Menu:
-                delete (MenuState*)currentState;
+                delete currentState;
                 currentState = new GameState;
                 break;
             }
@@ -43,6 +42,6 @@ int main() {
         window.display();
     }
     delete currentState;
-    
+
     return 0;
 }
