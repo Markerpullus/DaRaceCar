@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="DaCar.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="States\GameState.cpp" />
@@ -164,6 +165,7 @@
     <Font Include="Assets\Candal.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="DaCar.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="States\GameState.h" />

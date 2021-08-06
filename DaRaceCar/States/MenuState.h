@@ -1,18 +1,19 @@
 #pragma once
 
 #include "State.h"
+#include "../Button.h"
 
 class MenuState : public State
 {
 private:
 	sf::Text menuText;
+	sf::Text timerText;
 	sf::Font font;
 
 	sf::Texture convertibleTexture;
 	sf::Sprite convertible;
 
-	sf::RectangleShape button;
-	sf::Text buttonText;
+	Button button;
 
 	sf::View camera;
 

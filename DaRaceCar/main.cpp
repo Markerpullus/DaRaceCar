@@ -30,11 +30,11 @@ int main() {
             switch (currentState->type)
             {
             case States::Game:
-                delete currentState;
+                delete (GameState*)currentState;
                 currentState = new MenuState;
                 break;
             case States::Menu:
-                delete currentState;
+                delete (MenuState*)currentState;
                 currentState = new GameState;
                 break;
             }
@@ -42,6 +42,7 @@ int main() {
         currentState->Update();
         window.display();
     }
+    delete currentState;
     
     return 0;
 }

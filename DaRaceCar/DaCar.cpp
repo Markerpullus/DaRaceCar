@@ -11,6 +11,7 @@
 #define RAD2DEG 57.295779513082320876f
 
 bool DaCar::inAir = false;
+double DaCar::bestTime = 0.0f;
 
 DaCar::DaCar(b2World* w)
 	: world(w)

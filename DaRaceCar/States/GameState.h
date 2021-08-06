@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 #include <box2d/box2d.h>
 
 #include "State.h"
@@ -26,6 +28,11 @@ private:
 	sf::View camera;
 	sf::Texture flagTexture;
 	sf::Sprite finishFlag;
+	sf::Font font;
+	sf::Text timerText;
+
+	std::chrono::steady_clock::time_point begin;
+	std::chrono::duration<double> elapsed;
 
 public:
 	GameState();

@@ -21,7 +21,7 @@ void tokenize(std::string& str, char delim, std::vector<float>& out)
 Map::Map(b2World* w)
 	: world(w)
 {
-	texture.loadFromFile("Assets/map.png");
+	texture.loadFromFile("Assets/level1.png");
 	mapSprite.setTexture(texture);
 	mapSprite.setOrigin(3002, 360);
 	mapSprite.setPosition(3000, 0);
@@ -31,7 +31,7 @@ Map::Map(b2World* w)
 	mapBody = world->CreateBody(&mapBodyDef);
 }
 
-void Map::LoadFromFile(std::string file)
+void Map::LoadHitBoxFromFile(std::string file)
 {
 	std::ifstream stream(file);
 

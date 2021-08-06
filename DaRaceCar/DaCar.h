@@ -34,6 +34,7 @@ private:
 	sf::Sprite wheel2Sprite;
 
 	static bool inAir;
+	static double bestTime;
 	int wheelIdentifier = 1;
 
 public:
@@ -49,6 +50,7 @@ public:
 	void Update();
 
 	friend class GameState;
+	friend class MenuState;
 	friend class ContactListener;
 };
 

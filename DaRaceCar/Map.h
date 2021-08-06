@@ -27,7 +27,7 @@ public:
 
 	inline b2Body* GetBody() { return mapBody; }
 
-	void LoadFromFile(std::string file);
+	void LoadHitBoxFromFile(std::string file);
 
 	friend class GameState;
 };
