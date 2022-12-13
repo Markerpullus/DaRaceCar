@@ -1,9 +1,12 @@
+#include <chrono>
+#include <thread>
 #include <SFML\Graphics.hpp>
 
 #include "States/MenuState.h"
 #include "States/GameState.h"
 
 int main() {
+    using namespace std::chrono;
     sf::RenderWindow window(sf::VideoMode(1280, 720), "DaRaceCar");
     window.setVerticalSyncEnabled(true);
     State::window = &window;
@@ -12,6 +15,8 @@ int main() {
     
     while (window.isOpen())
     {
+        auto now = steady_clock::now() + 15ms;
+
         sf::Event e;
         while (window.pollEvent(e))
         {
@@ -40,6 +45,8 @@ int main() {
         }
         currentState->Update();
         window.display();
+
+        std::this_thread::sleep_until(now);
     }
     delete currentState;
 
